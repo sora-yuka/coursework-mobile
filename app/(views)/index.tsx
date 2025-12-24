@@ -1,4 +1,4 @@
-import { ScrollView, View, Pressable, Image, StyleSheet } from "react-native"
+import { ScrollView, View, Pressable, Image, StyleSheet, BackHandler } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useState } from "react"
 import ThemedText from "@/components/themed-text"
@@ -22,7 +22,7 @@ const metal: Record<string, string> = {
 }
 
 export default function HomeScreen() {
-    const { count, availability, error } = useJewelry()
+    const { count, availability, price } = useJewelry()
     const [jewelryType, setJewelryType] = useState("ring")
     const totalQuantity = count.find(item => item.category === jewelryType)?.total || 0
     const stockQuantity = count.find(item => item.category === jewelryType)?.stock || 0
@@ -99,6 +99,10 @@ export default function HomeScreen() {
                         }) }
                     </View>
                 </View>
+                <View style={ styles.totalPriceContainer }>
+                    <ThemedText style={ styles.totalPriceText }>Общая цена</ThemedText>
+                    <ThemedText type="title">{ price?.totalPrice ?? 0 } сом</ThemedText>
+                </View>
             </ScrollView>
         </SafeAreaView>
     )
@@ -173,5 +177,17 @@ const styles = StyleSheet.create({
     lineGroupValue: {
         flexDirection: "row",
         gap: 60,
+    },
+    totalPriceContainer: {
+        marginTop: 40,
+        paddingVertical: 20,
+        paddingHorizontal: 30,
+        backgroundColor: "#fff",
+        borderRadius: 8,
+    },
+    totalPriceText: {
+        marginBottom: 15,
+        textAlign: "center",
+        fontWeight: "600",
     }
 })

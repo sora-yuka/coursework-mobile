@@ -5,7 +5,9 @@ import { toastConfig } from '../components/toast'
 export default function RootLayout() {
     return (
         <>
-            <Stack screenOptions={{ headerShown: false }} />
+            <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="(views)" />
+            </Stack>
             <Toast config={toastConfig} />
         </>
     )

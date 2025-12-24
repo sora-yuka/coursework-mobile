@@ -14,23 +14,29 @@ type availabilityType = {
     exists: boolean,
 }
 
+type price = {
+    totalPrice: number,
+}
+
 export default function useJewelry() {
     const [count, setCount] = useState<jewelryType[]>([])
     const [availability, setAvailability] = useState<availabilityType[]>([])
-    const [error, setError] = useState(null)
+    const [price, setPrice] = useState<price>()
 
     useEffect(() => {
         const fetchData = async () => {
-            const [countResponse, availabilityResponse] = await Promise.all([
+            const [countResponse, availabilityResponse, priceResponse] = await Promise.all([
                 api.get("/api/v1/jewelry/count-by-type"),
                 api.get("/api/v1/jewelry/availability"),
+                api.get("/api/v1/jewelry/total-price")
             ])
             setCount(countResponse)
             setAvailability(availabilityResponse)
+            setPrice({ totalPrice: priceResponse.total_price })
         }
         
         fetchData()
     }, [])
 
-    return { count, availability, error }
+    return { count, availability, price }
 }
