@@ -101,7 +101,7 @@ export default function HomeScreen() {
                 </View>
                 <View style={ styles.totalPriceContainer }>
                     <ThemedText style={ styles.totalPriceText }>Общая цена</ThemedText>
-                    <ThemedText type="title">{ price?.totalPrice ?? 0 } сом</ThemedText>
+                    <ThemedText type="title">{ price?.totalPrice ?? 0 } c</ThemedText>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -183,11 +183,12 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         paddingHorizontal: 30,
         backgroundColor: "#fff",
-        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: "#444444",
+        borderRadius: 15,
     },
     totalPriceText: {
-        marginBottom: 15,
+        marginBottom: 10,
         textAlign: "center",
-        fontWeight: "600",
     }
 })
